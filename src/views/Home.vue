@@ -11,13 +11,15 @@
     <!-- 主体 -->
     <el-container>
       <!-- 侧边栏 -->
+      <el-aside :width="isCollapse ? '64px':'200px'">
        <div class="toggle-button" @click="togleCollapse">|||</div>
         <el-menu unique-opened :collapse="isCollapse" :collapse-transition="false" router :default-active="activePath" background-color="#333744" text-color="#fff" active-text-color="#409FFF">
            <!-- :unique-opened="true"->只允许展开一个菜单 -->
            <!-- :collapse-transition="false" -> 关闭动画 -->
+           <!-- default-active -> 高亮菜单 -->
            <!-- router -> 导航开启路由模式 -->
           <!-- 一级菜单  -->
-          <el-submenu :index="item.id+''" v-for="item in menuList" :key="item.id" >
+          <el-submenu :index="item.id+''" v-for="item in menuList" :key="item.id" > <!-- key? index只接受字符串-->
             <!-- 一级菜单的模板区域 -->
             <template slot="title">
               <i :class="iconObj[item.id]"></i>
@@ -35,6 +37,7 @@
             </el-menu-item>
           </el-submenu>
         </el-menu>
+        </el-aside>
       <!-- 内容主体 -->
       <el-main>
         <router-view></router-view>
